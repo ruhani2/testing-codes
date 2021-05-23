@@ -25,7 +25,7 @@
                .then(function (stream) {
                 video_element.srcObject = stream;
                
-                let scanner = new Instascan.Scanner({ video: vide_element});
+                let scanner = new Instascan.Scanner({ video: video_element});
                 Instascan.Camera.getCameras().then(function(cameras){
                   if(cameras.length > 0 ){
                    scanner.start(cameras[0]);
