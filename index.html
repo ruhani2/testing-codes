@@ -27,7 +27,7 @@
                 video: videoConstraints,
                 audio: false
               };
-              navigator.mediaDevices.getUserMedia(constraints_type)
+              navigator.mediaDevices.getUserMedia({video: constraints_type})
                .then(function (stream) {
                 video_element.srcObject = stream;
                
