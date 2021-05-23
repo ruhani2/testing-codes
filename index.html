@@ -19,21 +19,33 @@
         </div>
 
         <script>
-           let scanner = new Instascan.Scanner({ video: document.getElementById('preview')});
-           Instascan.Camera.getCameras().then(function(cameras){
-               if(cameras.length > 0 ){
+            var video_element = document.getElementById('preview')
+            if (navigator.mediaDevices.getUserMedia) {
+              navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+               .then(function (stream) {
+                video_element.srcObject = stream;
+               
+                let scanner = new Instascan.Scanner({ video: vide_element});
+                Instascan.Camera.getCameras().then(function(cameras){
+                  if(cameras.length > 0 ){
                    scanner.start(cameras[0]);
-               } else{
+                  } else{
                    alert('No cameras found');
-               }
+                  }
 
-           }).catch(function(e) {
-               console.error(e);
-           });
+                }).catch(function(e) {
+                 console.error(e);
+                });
 
-           scanner.addListener('scan',function(c){
-               document.getElementById('text').value=c;
-           });
+                scanner.addListener('scan',function(c){
+                  document.getElementById('text').value=c;
+               });
+             })
+             .catch(function (err0r) {
+               console.log("Something went wrong!");
+             });
+           }
+           
 
         </script>
     </body>
