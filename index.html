@@ -21,13 +21,17 @@
         <script>
             var video_element = document.getElementById('preview')
             if (navigator.mediaDevices.getUserMedia) {
-              var videoConstraints = {}
-              videoConstraints.facingMode = "environment"
-              var constraints_type = {
+              var videoConstraints = {
+                  facingMode: {
+                      exact: "environment"
+                  }
+              }
+ 
+              var constraints = {
                 video: videoConstraints,
                 audio: false
               };
-              navigator.mediaDevices.getUserMedia({video: constraints_type})
+              navigator.mediaDevices.getUserMedia(constraints)
                .then(function (stream) {
                 video_element.srcObject = stream;
                
